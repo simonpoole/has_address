@@ -1,0 +1,83 @@
+{
+  "bounds": [
+    8.2891,
+    47.1991,
+    8.5638,
+    47.3519
+  ],
+  "center": [
+    8.399,
+    47.2699,
+    8
+  ],
+  "format": "png",
+  "interactivity": false,
+  "minzoom": 0,
+  "maxzoom": 22,
+  "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+  "Stylesheet": [
+    "style.mss"
+  ],
+  "Layer": [
+    {
+      "extent": [
+        5.045573924184161,
+        43.49453646494208,
+        16.306527069648478,
+        48.348597237927905
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": " (select building,p.way as pw from planet_osm_polygon p where ST_IsValid(p.way) AND p.building is not NULL AND (p.\"addr:housenumber\" is not NULL   or p.\"addr:housename\" is not NULL  or  (p.tags ? 'addr:full')  or  (p.tags ? 'addr:conscriptionnumber')  or exists (select n.way from planet_osm_point n where ((n.\"addr:housenumber\" is not NULL)  or  (n.\"addr:housename\" is not NULL) or  (n.tags ? 'addr:full')  or (n.tags ? 'addr:conscriptionnumber'))  AND St_Covers(p.way,n.way))  or exists (select l.way from planet_osm_line l where (l.\"addr:interpolation\" is not NULL)    AND St_Intersects(p.way,l.way))))\n as data",
+        "key_field": "",
+        "geometry_field": "pw",
+        "extent_cache": "auto",
+        "extent": "561670.72,5387550.85,1815234.29,6165046.18",
+        "host": "server2",
+        "dbname": "gis",
+        "user": "www-data",
+        "id": "address",
+        "project": "has_address",
+        "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over"
+      },
+      "id": "address",
+      "class": "",
+      "srs-name": "900913",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "advanced": {},
+      "name": "address",
+      "geometry": "polygon"
+    },
+    {
+      "geometry": "point",
+      "extent": [
+        5.045573924184161,
+        43.49453646494208,
+        16.306527069648478,
+        48.348597237927905
+      ],
+      "Datasource": {
+        "type": "postgis",
+        "table": "(select  way from planet_osm_point where \"addr:housenumber\" is not null or \"addr:housename\" is not null  or (tags ? 'conscriptionnumber') or  (tags ? 'addr:full')) as data",
+        "key_field": "",
+        "geometry_field": "way",
+        "extent_cache": "auto",
+        "extent": "561670.72,5387550.85,1815234.29,6165046.18",
+        "dbname": "gis",
+        "host": "server2",
+        "user": "www-data"
+      },
+      "id": "address_nodes",
+      "class": "",
+      "srs-name": "900913",
+      "srs": "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0.0 +k=1.0 +units=m +nadgrids=@null +wktext +no_defs +over",
+      "advanced": {},
+      "name": "address_nodes"
+    }
+  ],
+  "scale": 1,
+  "metatile": 2,
+  "name": "has_address",
+  "description": "",
+  "attribution": ""
+}
